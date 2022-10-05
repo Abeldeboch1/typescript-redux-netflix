@@ -6,9 +6,13 @@ import axios from './axios';
 
 const base_url = 'https://image.tmdb.org/t/p/original/';
 interface RowProps {
-  title: any;
+  title?: string;
   fetchUrl: string;
-  isLargeRow?: boolean;
+  isLargeRow?: boolean | undefined;
+  id?: number;
+  name?: string;
+  poster_path?: string;
+  backdrop_path?: string;
 }
 function Row({ title, fetchUrl, isLargeRow}: RowProps) {
   const [movies, setMovies] = useState([]);
@@ -32,7 +36,7 @@ function Row({ title, fetchUrl, isLargeRow}: RowProps) {
     if(trailerUrl){
       setTrailerUrl('')
     }else {
-      movieTrailer(movie?.title || '')
+      movieTrailer(movie.title || '')
       .then((url: string | URL) => {
         const urlParams = new URLSearchParams(new URL(url).search)
         setTrailerUrl(urlParams.get('v') || '')
@@ -51,7 +55,7 @@ function Row({ title, fetchUrl, isLargeRow}: RowProps) {
             onClick={() => handleClick(movie)}
             className={`row__poster ${isLargeRow && 'row__posterLarge'}`}
             src={`${base_url}${
-              isLargeRow ? movie.poster_path : movie.backdrop_path             
+              isLargeRow ? movie.poster_path : movie.backdrop_path            
             }`}
             alt={movie.name}
           />

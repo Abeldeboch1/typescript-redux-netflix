@@ -72,7 +72,7 @@ function Netflix() {
           </div>
         </div>
       </div>
-      <Slider movies={movies} />
+      <Slider movies={movies} slice={undefined} />
     </Container>
   );
 }

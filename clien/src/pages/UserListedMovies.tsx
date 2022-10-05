@@ -19,7 +19,7 @@ type UserListedMoviesProps = {
   }
   // netflix: any;
 }
-function UserListedMovies({ movieData}: UserListedMoviesProps) {
+function UserListedMovies({ }: UserListedMoviesProps) {
   const movies = useSelector((state) => state.netflix.movies);
   const dispatch = useDispatch();
   const navigate = useNavigate();

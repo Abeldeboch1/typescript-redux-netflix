@@ -12,6 +12,7 @@ import { firebaseAuth } from '../utils/firebase';
 import { useDispatch } from 'react-redux';
 import { removeMovieFromLiked } from '../store/netflixSlice';
 import Request  from './Request';
+import { any } from 'prop-types';
 
 type CardProps = {
   movieData: {

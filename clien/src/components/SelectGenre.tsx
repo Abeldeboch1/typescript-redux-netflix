@@ -1,5 +1,3 @@
-import { strict } from 'assert';
-import { string } from 'prop-types';
 import React, { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { fetchDataByGenre } from '../store/netflixSlice';
@@ -8,12 +6,12 @@ type SelectGenreProps = {
   genres: string;
   type: string;
   fetchDataByGenre: { 
-    genres?: string | undefined;
-    type?: string | undefined;
+    genres?: string;
+    type?: string;
   };
-  map?: [];
+  map: any;
 }
-export default function SelectGenre({ genres, type, fetchDataByGenre }: SelectGenreProps) {
+ function SelectGenre({ genres, type, fetchDataByGenre }: SelectGenreProps) {
   const dispatch = useDispatch();
   return (
     <Select
@@ -38,7 +36,7 @@ export default function SelectGenre({ genres, type, fetchDataByGenre }: SelectGe
     </Select>
   );
 }
-
+export default SelectGenre;
 const Select = styled.select`
   margin-left: 5rem;
   cursor: pointer;

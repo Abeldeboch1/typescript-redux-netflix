@@ -16,9 +16,14 @@ export default function App() {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/player" element={<Player />} />
         <Route path="/tv" element={<TVShows />} />
-        <Route path="/movies" element={<MoviePage />} />
+        <Route path="/movies" element={<MoviePage getGenres={undefined} genres={undefined} type={undefined} />} />
         <Route path="/new" element={<Player />} />
-        <Route path="/mylist" element={<UserListedMovies />} />
+        <Route path="/mylist" element={<UserListedMovies movieData={{
+          name: '',
+          image: '',
+          id: undefined,
+          genres: undefined
+        }} />} />
         <Route path="/" element={<Netflix />} />
       </Routes>
     </BrowserRouter>

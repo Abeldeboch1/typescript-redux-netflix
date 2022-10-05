@@ -5,7 +5,6 @@ import Card from './Card';
 type CardSliderProps = {
   data?: any;
   title?: string;
-  // showControls: boolean;
   movieData: { 
     name: string | undefined;
     image: string | undefined;

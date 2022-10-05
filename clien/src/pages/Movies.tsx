@@ -13,10 +13,10 @@ import NotAvailable from '../components/NotAvailable';
 type MoviePageProps = {
   // state?: {};
   getGenres: any;
-  genres: string;
-  type: string;
+  genres: string | undefined;
+  type: string | undefined;
 }
-function MoviePage({ getGenres, type}:MoviePageProps) {
+function MoviePage({ getGenres}:MoviePageProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const movies = useSelector((state) => state.netflix.movies);
   const genres = useSelector((state) => state.netflix.genres);
@@ -53,8 +53,11 @@ function MoviePage({ getGenres, type}:MoviePageProps) {
         <Navbar isScrolled={isScrolled} />
       </div>
       <div className="data">
-        <SelectGenre genres={genres} type="movie" />
-        {movies.length ? <Slider movies={movies} /> : <NotAvailable />}
+        <SelectGenre genres={genres} type="movie" fetchDataByGenre={{
+          genres: undefined,
+          type: undefined
+        }} map={undefined} />
+        {movies.length ? <Slider movies={movies} slice={undefined} /> : <NotAvailable />}
       </div>
     </Container>
   );

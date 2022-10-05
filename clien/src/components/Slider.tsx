@@ -1,10 +1,11 @@
+
 import React from 'react';
 import styled from 'styled-components';
 import CardSlider from './CardSlider';
 
 interface SliderProp {
   movies?: number | undefined;
-  slice?: number;
+
 }
 export default function Slider({ movies }: SliderProp) {
   const getMoviesFromRange = (from: number, to: number) => {

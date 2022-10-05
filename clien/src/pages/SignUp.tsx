@@ -4,15 +4,16 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import BackgroundImage from '../components/BackgroundImage';
 import Header from '../components/Header';
 import { firebaseAuth } from '../utils/firebase';
+import { any } from 'prop-types';
 
-// type SignUpProp = {
-//   showPassword?: boolean ;
-// }
-function SignUp() {
+type SignUpProp = {
+  showPassword: boolean;
+}
+function SignUp({}:SignUpProp ) {
   const [showPassword, setShowPassword] = useState(false);
   const [formValues, setFormValues] = useState({
     email: '',
@@ -105,7 +106,7 @@ const Container = styled.div`
       }
       .form {
         display: grid;
-        grid-template-columns: ${({ showPassword}) =>
+        grid-template-columns: ${({ showPassword}: any) =>
     showPassword ? '1fr 1fr' : '2fr 1fr'};
         width: 60%;
         input {
