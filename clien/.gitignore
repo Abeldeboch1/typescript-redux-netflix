@@ -12,9 +12,9 @@
 /build
 
 # misc
-axios 
-requests
-utils
+# axios 
+# requests
+# utils
 .DS_Store
 .env.local
 .env
