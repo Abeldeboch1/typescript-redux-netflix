@@ -8,30 +8,27 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import Navbar from '../components/Navbar';
 import backgroundImage from '../assets/home.jpg';
 import MovieLogo from '../assets/homeTitle.webp';
-
+import { RootState } from '../store';
 import { firebaseAuth } from '../utils/firebase';
 import { fetchMovies, getGenres } from '../store/netflixSlice';
 import Slider from '../components/Slider';
+import { isAsyncThunkAction } from '@reduxjs/toolkit';
 
-// type NetflixProp = {
-//   getGenres: {};
-// }
 function Netflix() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const movies = useSelector((state) => state.netflix.movies);
-  const genres = useSelector((state) => state.netflix.genres);
-  const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
+  const movies = useSelector((state:RootState) => state.netflix.movies);
+  const genres = useSelector((state:RootState) => state.netflix.genres);
+  const genresLoaded = useSelector((state:RootState) => state.netflix.genresLoaded);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getGenres());
+    dispatch<any>(getGenres());
   }, []);
 
   useEffect(() => {
     if (genresLoaded) {
-      dispatch(fetchMovies({ genres, type: 'all' }));
+      dispatch<any>(fetchMovies({ genres, type: 'all' }));
     }
   }, [genresLoaded]);
 
@@ -72,7 +69,7 @@ function Netflix() {
           </div>
         </div>
       </div>
-      <Slider movies={movies} slice={undefined} />
+      <Slider movies={movies} slice={''} />
     </Container>
   );
 }

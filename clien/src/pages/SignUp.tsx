@@ -29,11 +29,9 @@ function SignUp({}:SignUpProp ) {
       console.log(error);
     }
   };
-
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) navigate('/');
   });
-
   return (
     <Container showPassword={showPassword}>
       <BackgroundImage />

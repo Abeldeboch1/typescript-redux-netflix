@@ -7,7 +7,6 @@ import { firebaseAuth } from '../utils/firebase';
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
 import { getUsersLikedMovies } from '../store/netflixSlice';
-import { any, string } from 'prop-types';
 
 type UserListedMoviesProps = {
   movieData: {
@@ -17,7 +16,6 @@ type UserListedMoviesProps = {
     id?: any;
     genres: any;
   }
-  // netflix: any;
 }
 function UserListedMovies({ }: UserListedMoviesProps) {
   const movies = useSelector((state) => state.netflix.movies);
@@ -33,7 +31,7 @@ function UserListedMovies({ }: UserListedMoviesProps) {
 
   useEffect(() => {
     if (email) {
-      dispatch(getUsersLikedMovies(email));
+      dispatch<any>(getUsersLikedMovies(email));
     }
   }, [email]);
 

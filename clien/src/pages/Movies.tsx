@@ -9,18 +9,18 @@ import { fetchMovies, getGenres } from '../store/netflixSlice';
 import SelectGenre from '../components/SelectGenre';
 import Slider from '../components/Slider';
 import NotAvailable from '../components/NotAvailable';
+import { RootState } from '../store';
 
 type MoviePageProps = {
-  // state?: {};
   getGenres: any;
   genres: string | undefined;
   type: string | undefined;
 }
 function MoviePage({ getGenres}:MoviePageProps) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const movies = useSelector((state) => state.netflix.movies);
-  const genres = useSelector((state) => state.netflix.genres);
-  const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
+  const movies = useSelector((state:RootState) => state.netflix.movies);
+  const genres = useSelector((state:RootState) => state.netflix.genres);
+  const genresLoaded = useSelector((state:RootState) => state.netflix.genresLoaded);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function MoviePage({ getGenres}:MoviePageProps) {
 
   useEffect(() => {
     if (genresLoaded) {
-      dispatch(fetchMovies({ genres, type: 'movie' }));
+      dispatch<any>(fetchMovies({ genres, type: 'movie' }));
     }
   }, [genresLoaded]);
 
@@ -57,7 +57,7 @@ function MoviePage({ getGenres}:MoviePageProps) {
           genres: undefined,
           type: undefined
         }} map={undefined} />
-        {movies.length ? <Slider movies={movies} slice={undefined} /> : <NotAvailable />}
+        {movies?.length ? <Slider movies={movies} slice={''} /> : <NotAvailable />}
       </div>
     </Container>
   );

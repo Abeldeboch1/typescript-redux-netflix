@@ -3,6 +3,7 @@ import './Row.css';
 import YouTube from 'react-youtube';
 import movieTrailer from 'movie-trailer';
 import axios from './axios';
+import { any } from 'prop-types';
 
 const base_url = 'https://image.tmdb.org/t/p/original/';
 interface RowProps {

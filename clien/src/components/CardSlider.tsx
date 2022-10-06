@@ -9,13 +9,10 @@ type CardSliderProps = {
     name: string | undefined;
     image: string | undefined;
   };
-  // listRef: string;
   map: [];
   index: any;
-  // getBoundingClientRect: string;
 }
 export default React.memo(({ data, title }: CardSliderProps) => {
-  // const listRef = useRef<HTMLDivelement>(null);
   const listRef= useRef<HTMLDivElement>(null);
   const [sliderPosition, setSliderPosition] = useState(0);
   const [showControls, setShowControls] = useState(false);

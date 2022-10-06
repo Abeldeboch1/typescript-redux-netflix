@@ -1,3 +1,4 @@
+import { any } from 'prop-types';
 import React, { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { fetchDataByGenre } from '../store/netflixSlice';
