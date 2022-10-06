@@ -95,5 +95,3 @@ const Container = styled.div`
     }
   }
 `;
-
-
