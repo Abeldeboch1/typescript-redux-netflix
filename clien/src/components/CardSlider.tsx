@@ -12,6 +12,10 @@ type CardSliderProps = {
   map: [];
   index: any;
 }
+interface ContainerProps {
+  readonly showControls: boolean;
+};
+
 export default React.memo(({ data, title }: CardSliderProps) => {
   const listRef= useRef<HTMLDivElement>(null);
   const [sliderPosition, setSliderPosition] = useState(0);
@@ -44,7 +48,7 @@ export default React.memo(({ data, title }: CardSliderProps) => {
           <AiOutlineLeft onClick={() => handleDirection('left')} />
         </div>
         <div className="slider flex" ref={listRef}>
-          {data.map((movie: { id: any; genres?: any; name?: string; image?: string; }, index: any) => {
+         {data.map((movie, index) => {
             return <Card movieData={movie} index={index} key={movie.id} />;
           })}
         </div>
@@ -59,7 +63,7 @@ export default React.memo(({ data, title }: CardSliderProps) => {
     </Container>
   );
 });
-const Container = styled.div`
+const Container = styled.div<ContainerProps>`
   gap: 1rem;
   position: relative;
   padding: 2rem 0;

@@ -28,12 +28,12 @@ function Netflix() {
 
   useEffect(() => {
     if (genresLoaded) {
-      dispatch<any>(fetchMovies ({ genres, type: 'all' }));
+      dispatch<any>(fetchMovies({ genres, type: 'all' }));
     }
   }, [genresLoaded]);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (!currentUser) navigate('/ login');
+    if (!currentUser) navigate('/login');
   });
 
   window.onscroll = () => {
@@ -69,7 +69,7 @@ function Netflix() {
           </div>
         </div>
       </div>
-      <Slider movies={movies} slice={undefined} />
+      <Slider movies={movies}  />
     </Container>
   );
 }

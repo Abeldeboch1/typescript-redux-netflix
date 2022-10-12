@@ -1,33 +1,28 @@
-import { any } from 'prop-types';
 import React, { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { fetchDataByGenre } from '../store/netflixSlice';
 
 type SelectGenreProps = {
-  genres: string;
+  genres: [] | undefined;
   type: string;
-  fetchDataByGenre: { 
-    genres?: string;
-    type?: string;
-  };
-  map: any;
+  map: [];
 }
- function SelectGenre({ genres, type, fetchDataByGenre }: SelectGenreProps) {
+export default function SelectGenre({ genres, type}: SelectGenreProps) {
   const dispatch = useDispatch();
   return (
     <Select
       className="flex"
       onChange={(e) => {
-        dispatch(
+        dispatch<any>(
           fetchDataByGenre({
-            genres,
+            //  genres,
             genre: e.target.value,
             type,
           })
         );
       }}
     >
-      {genres.map((genre: any) => {
+      {genres?.map((genre: any) => {
         return (
           <option value={genre.id} key={genre.id}>
             {genre.name}
@@ -37,7 +32,7 @@ type SelectGenreProps = {
     </Select>
   );
 }
-export default SelectGenre;
+
 const Select = styled.select`
   margin-left: 5rem;
   cursor: pointer;

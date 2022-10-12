@@ -11,13 +11,13 @@ import { onAuthStateChanged, User } from 'firebase/auth';
 import { firebaseAuth } from '../utils/firebase';
 import { useDispatch } from 'react-redux';
 import { removeMovieFromLiked } from '../store/netflixSlice';
-import Request  from './Request';
-import { any } from 'prop-types';
+import Request from './Request';
+
 
 type CardProps = {
   movieData: {
     id: any;
-    genres?: any;
+    genres: any;
     name?: string | undefined;
     image?: string;
   };
@@ -89,7 +89,7 @@ export default React.memo(function Card({ movieData, isLiked = false }: CardProp
                   <BsCheck
                     title="Remove from List"
                     onClick={() =>
-                      dispatch(
+                      dispatch<any>(
                         removeMovieFromLiked({ movieId: movieData.id, email })
                       )
                     }
