@@ -3,18 +3,16 @@ import './Row.css';
 import YouTube from 'react-youtube';
 import movieTrailer from 'movie-trailer';
 import axios from './axios';
-import { any } from 'prop-types';
+
 
 const base_url = 'https://image.tmdb.org/t/p/original/';
 interface RowProps {
-  title?: string;
+  title: string;
   fetchUrl: string;
-  isLargeRow?: boolean | undefined;
-  id?: number;
-  name?: string;
-  poster_path?: string;
-  backdrop_path?: string;
+  isLargeRow?: boolean | '';
+
 }
+
 function Row({ title, fetchUrl, isLargeRow}: RowProps) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState('');
@@ -33,7 +31,7 @@ function Row({ title, fetchUrl, isLargeRow}: RowProps) {
       autoplay: 1,
     }
   }
-  const handleClick = (movie: number) => {
+  const handleClick = (movie: any) => {
     if(trailerUrl){
       setTrailerUrl('')
     }else {
@@ -50,7 +48,7 @@ function Row({ title, fetchUrl, isLargeRow}: RowProps) {
     <div className="row">
       <h2>{title}</h2>
       <div className="row__posters">
-        {movies.map((movie) => (
+        {movies.map((movie: any) => (
           <img
             key={movie.id}
             onClick={() => handleClick(movie)}

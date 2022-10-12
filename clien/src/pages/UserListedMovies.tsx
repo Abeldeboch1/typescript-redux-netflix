@@ -7,31 +7,31 @@ import { firebaseAuth } from '../utils/firebase';
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
 import { getUsersLikedMovies } from '../store/netflixSlice';
+import { RootState } from '../store';
 
 type UserListedMoviesProps = {
   movieData: {
     [x: string]: any;
     name: string;
     image: string;
-    id?: any;
-    genres: any;
+    id?: [] | undefined;
   }
 }
 function UserListedMovies({ }: UserListedMoviesProps) {
-  const movies = useSelector((state) => state.netflix.movies);
+  const movies = useSelector((state:RootState) => state.netflix.movies);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [email, setEmail] = useState(undefined);
+  const [email, setEmail] = useState('');
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) setEmail(currentUser.email);
+  onAuthStateChanged(firebaseAuth, (currentUser: User | any) => {
+    if (currentUser&&currentUser) setEmail(currentUser.email);
     else navigate('/login');
   });
 
   useEffect(() => {
     if (email) {
-      dispatch<any>(getUsersLikedMovies(email));
+      dispatch<any>(getUsersLikedMovies());
     }
   }, [email]);
 
@@ -46,13 +46,14 @@ function UserListedMovies({ }: UserListedMoviesProps) {
       <div className="content flex column">
         <h1>My List</h1>
         <div className="grid flex">
-          {movies.map((movie: { id?: any; name?: string; image?: string; }, index: any) => {
+          {movies?.map((movie, index) => {
             return (
               <Card
                 movieData={movie}
                 index={index}
-                key={movie.id}
-                isLiked
+                // {movie.id}
+                key={movie}
+                isLiked={true}
               />
             );
           })}

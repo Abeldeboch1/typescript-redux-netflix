@@ -5,7 +5,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import Request from "../components/Request";
- function Player() {
+function Player() {
   const navigate = useNavigate();
 
   return (

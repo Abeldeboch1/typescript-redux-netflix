@@ -10,12 +10,8 @@ import { fetchMovies, getGenres } from '../store/netflixSlice';
 import SelectGenre from '../components/SelectGenre';
 import Slider from '../components/Slider';
 import { RootState } from '../store';
-import { any } from 'prop-types';
 
-type TVShowsProps = {
-  
-}
-function TVShows({}: TVShowsProps) {
+function TVShows() {
   const [isScrolled, setIsScrolled] = useState(false);
   const movies = useSelector((state:RootState) => state.netflix.movies);
   const genres = useSelector((state:RootState) => state.netflix.genres);
@@ -31,11 +27,11 @@ function TVShows({}: TVShowsProps) {
 
   useEffect(() => {
     if (genresLoaded) {
-      dispatch<any>(fetchMovies({ genres, type: 'tv' }));
+      dispatch<any>(fetchMovies);
     }
   }, [genresLoaded]);
 
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState('');
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) setUser(currentUser.uid);
@@ -51,7 +47,7 @@ function TVShows({}: TVShowsProps) {
     <Container>
       <Navbar isScrolled={isScrolled} />
       <div className="data">
-        <SelectGenre genres={genres} type="tv" />
+        <SelectGenre genres={genres} type="tv" map={[]} />
         {movies?.length ? (
           <>
             <Slider movies={movies} />

@@ -3,13 +3,14 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { string } from 'prop-types';
 import { RootState } from '.';
 import { API_KEY, TMDB_BASE_URL } from '../utils/constants';
 interface netflix {
   [x: string]: any;
-  movies?: [];
+  movies: [];
   genresLoaded: boolean;
-  genres?: [];
+  genres: [];
 }
 interface movie { 
   id: number;
@@ -22,7 +23,7 @@ interface movie {
 interface netflix {
   movie?: movie[];
   genresLoaded: boolean;
-  // genres?: string[];
+
 }
 const initialState: netflix = {
   movies: [],
@@ -57,9 +58,8 @@ export const createArrayFromRawData = (array: any[], moviesArray: any[], genres:
     
   });
 };
-
-export const getRawData = async (api: string, genres: any, paging = false) => {
-  const moviesArray: string | any[] = [];
+const getRawData = async (api, genres, paging = false) => {
+  const moviesArray = [];
   for (let i = 1; moviesArray.length < 60 && i < 10; i++) {
     const {
       data: { results },
@@ -131,10 +131,10 @@ export const netflixSlice = createSlice({
       state.genresLoaded = true;
     });
     builder.addCase(fetchMovies.fulfilled, (state, action) => {
-      state.movies; [] = action.payload;
+      state.movies = action.payload;
     });
     builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
-      state.movies; [] = action.payload;
+      state.movies = action.payload;
     });
     builder.addCase(getUsersLikedMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
