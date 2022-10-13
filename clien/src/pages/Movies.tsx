@@ -44,11 +44,11 @@ function MoviePage() {
 
   return (
     <Container>
-      <div className="navbar">
+      <div className='navbar'>
         <Navbar isScrolled={isScrolled} />
       </div>
-      <div className="data">
-        <SelectGenre genres={genres} type="movie" map={[]} />
+      <div className='data'>
+        <SelectGenre genres={genres} type='movie' map={[]} />
         {movies?.length ? <Slider movies={movies} /> : <NotAvailable />}
       </div>
     </Container>

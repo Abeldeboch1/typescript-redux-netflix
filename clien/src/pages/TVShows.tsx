@@ -27,7 +27,7 @@ function TVShows() {
 
   useEffect(() => {
     if (genresLoaded) {
-      dispatch<any>(fetchMovies);
+      dispatch<any>(fetchMovies({ genres, type: 'tv' }));
     }
   }, [genresLoaded]);
 

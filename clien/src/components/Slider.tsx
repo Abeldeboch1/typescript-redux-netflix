@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CardSlider from './CardSlider';
 
 interface SliderProp {
-  movies: [] | undefined;
+  movies: [] ;
 
 }
 export default function Slider({ movies }: SliderProp) {

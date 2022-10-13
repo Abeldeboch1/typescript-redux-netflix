@@ -1,30 +1,26 @@
 import {
   createAsyncThunk,
-  createSlice,
+  createSlice
 } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { string } from 'prop-types';
 import { RootState } from '.';
 import { API_KEY, TMDB_BASE_URL } from '../utils/constants';
 interface netflix {
   [x: string]: any;
-  movies: [];
   genresLoaded: boolean;
-  genres: [];
 }
 interface movie { 
   id: number;
   name: string;
   image: string;
-  genres: string[];
-  setGenres: any;
-  setMovies: any;
+  genres: string;
+  setGenres: {};
+  setMovies: {};
 }
-interface netflix {
-  movie?: movie[];
-  genresLoaded: boolean;
-
-}
+// interface netflix {
+//   movie?: movie[];
+//   genresLoaded: boolean;
+// }
 const initialState: netflix = {
   movies: [],
   genresLoaded: false,
@@ -40,7 +36,6 @@ export const getGenres = createAsyncThunk("netflix/genres", async () => {
   );
   return genres;
 });
-
 export const createArrayFromRawData = (array: any[], moviesArray: any[], genres: any[]) => {
   array.forEach((movie: { genre_ids: any[]; backdrop_path: any; id: any; original_name: any; original_title: any; }) => {
     const movieGenres: any[] = [];
@@ -69,8 +64,8 @@ const getRawData = async (api, genres, paging = false) => {
   return moviesArray;
 };
 type TypeProps = {
-  genre?: string;
-  type?: string;
+  genre: string;
+  type: string;
 }
 export const fetchDataByGenre = createAsyncThunk <movie[], TypeProps, {state: RootState}>(
   "netflix/genre",
@@ -84,8 +79,10 @@ export const fetchDataByGenre = createAsyncThunk <movie[], TypeProps, {state: Ro
     );
   }
 );
+export const fetchMovies = createAsyncThunk < movie[],
+  { genres: string[]; type: string},
 
-export const fetchMovies = createAsyncThunk < movie[], string, { state: RootState}>(
+  { state: RootState }>(
   'netflix/trending',
   async ({ type }: any, thunkAPI) => {
     const {
@@ -98,7 +95,6 @@ export const fetchMovies = createAsyncThunk < movie[], string, { state: RootStat
     );
   }
 );
-
 export const getUsersLikedMovies = createAsyncThunk(
   'type-redux/getLiked',
   async (email) => {
@@ -145,8 +141,6 @@ export const netflixSlice = createSlice({
   },
   reducers: {}
 });
-
-
 
 export const { setGenres, setMovies } = netflixSlice.actions;
 export default netflixSlice.reducer;

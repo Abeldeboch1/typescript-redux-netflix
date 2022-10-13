@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { fetchDataByGenre } from '../store/netflixSlice';
 
 type SelectGenreProps = {
-  genres: [] | undefined;
+  genres?: string | any;
   type: string;
   map: [];
 }
@@ -15,14 +15,14 @@ export default function SelectGenre({ genres, type}: SelectGenreProps) {
       onChange={(e) => {
         dispatch<any>(
           fetchDataByGenre({
-            //  genres,
+            // genres,
             genre: e.target.value,
             type,
           })
         );
       }}
     >
-      {genres?.map((genre: any) => {
+      {genres.map((genre) => {
         return (
           <option value={genre.id} key={genre.id}>
             {genre.name}

@@ -12,30 +12,29 @@ import { RootState } from '../store';
 import { firebaseAuth } from '../utils/firebase';
 import { fetchMovies, getGenres } from '../store/netflixSlice';
 import Slider from '../components/Slider';
-import { isAsyncThunkAction } from '@reduxjs/toolkit';
 
-function Netflix() {
+  type NetflixProps = {
+
+}
+  
+function Netflix({ }: NetflixProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const movies = useSelector((state:RootState) => state.netflix.movies);
   const genres = useSelector((state:RootState) => state.netflix.genres);
   const genresLoaded = useSelector((state:RootState) => state.netflix.genresLoaded);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch<any>(getGenres());
   }, []);
-
   useEffect(() => {
     if (genresLoaded) {
       dispatch<any>(fetchMovies({ genres, type: 'all' }));
     }
   }, [genresLoaded]);
-
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (!currentUser) navigate('/login');
   });
-
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
