@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import CardSlider from './CardSlider';
 
 interface SliderProp {
-  movies: [] ;
-
+  movies: string[];
 }
 export default function Slider({ movies }: SliderProp) {
   const getMoviesFromRange = (from: number, to: number) => {

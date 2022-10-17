@@ -6,7 +6,6 @@ import Request from "../components/Request";
 
 function Player() {
   const navigate = useNavigate();
-
   return (
     <Container>
       <div className="player">

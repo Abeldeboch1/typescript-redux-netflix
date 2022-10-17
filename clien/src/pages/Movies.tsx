@@ -16,32 +16,25 @@ function MoviePage() {
   const movies = useSelector((state:RootState) => state.netflix.movies);
   const genres = useSelector((state:RootState) => state.netflix.genres);
   const genresLoaded = useSelector((state:RootState) => state.netflix.genresLoaded);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch<any>(getGenres());
   }, []);
-
   useEffect(() => {
     if (genresLoaded) {
-      dispatch<any>(fetchMovies);
+      dispatch<any>(fetchMovies({ genres, type: 'movie' }));
     }
   }, [genresLoaded]);
-
   const [user, setUser] = useState('');
-
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) setUser(currentUser.uid);
     else navigate("/login");
   });
-
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
-
   return (
     <Container>
       <div className='navbar'>
@@ -54,7 +47,6 @@ function MoviePage() {
     </Container>
   );
 }
-
 const Container = styled.div`
   .data {
     margin-top: 8rem;

@@ -13,11 +13,7 @@ import { firebaseAuth } from '../utils/firebase';
 import { fetchMovies, getGenres } from '../store/netflixSlice';
 import Slider from '../components/Slider';
 
-  type NetflixProps = {
-
-}
-  
-function Netflix({ }: NetflixProps) {
+function Netflix() {
   const [isScrolled, setIsScrolled] = useState(false);
   const movies = useSelector((state:RootState) => state.netflix.movies);
   const genres = useSelector((state:RootState) => state.netflix.genres);

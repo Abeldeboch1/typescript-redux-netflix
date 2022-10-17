@@ -4,7 +4,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Navbar from '../components/Navbar';
-import CardSlider from '../components/CardSlider';
 import { firebaseAuth } from '../utils/firebase';
 import { fetchMovies, getGenres } from '../store/netflixSlice';
 import SelectGenre from '../components/SelectGenre';
@@ -16,7 +15,7 @@ function TVShows() {
   const movies = useSelector((state:RootState) => state.netflix.movies);
   const genres = useSelector((state:RootState) => state.netflix.genres);
   const genresLoaded = useSelector((state:RootState) => state.netflix.genresLoaded);
-  const dataLoading = useSelector((state:RootState) => state.netflix.dataLoading);
+  // const dataLoading = useSelector((state:RootState) => state.netflix.dataLoading);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

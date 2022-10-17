@@ -26,7 +26,7 @@ export default function Navbar({ isScrolled }:NavbarProp) {
           <div className="brand flex a-center j-center">
             <img src={logo} alt="logo" />
           </div>
-          <ul className="links flex">
+          <ul className='links flex'>
             {links.map(({ name, link }) => {
               return (
                 <li key={name}>

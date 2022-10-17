@@ -5,30 +5,22 @@ import {
 import axios from 'axios';
 import { RootState } from '.';
 import { API_KEY, TMDB_BASE_URL } from '../utils/constants';
-interface netflix {
-  [x: string]: any;
-  genresLoaded: boolean;
-}
-interface movie { 
+interface movie {
   id: number;
   name: string;
   image: string;
   genres: string;
   setGenres: {};
   setMovies: {};
+  movies: string[];
+  genresLoaded: boolean;
 }
-// interface netflix {
-//   movie?: movie[];
-//   genresLoaded: boolean;
-// }
-const initialState: netflix = {
+const initialState = {
   movies: [],
   genresLoaded: false,
   genres: [],
-  
 };
-
-export const getGenres = createAsyncThunk("netflix/genres", async () => {
+export const getGenres = createAsyncThunk('netflix/genres', async () => {
   const {
     data: { genres },
   } = await axios.get(
@@ -68,7 +60,7 @@ type TypeProps = {
   type: string;
 }
 export const fetchDataByGenre = createAsyncThunk <movie[], TypeProps, {state: RootState}>(
-  "netflix/genre",
+  'netflix/genre',
   async ({ genre, type }: TypeProps, thunkAPI) => {
     const {
       netflix: { genres },
@@ -81,7 +73,6 @@ export const fetchDataByGenre = createAsyncThunk <movie[], TypeProps, {state: Ro
 );
 export const fetchMovies = createAsyncThunk < movie[],
   { genres: string[]; type: string},
-
   { state: RootState }>(
   'netflix/trending',
   async ({ type }: any, thunkAPI) => {
@@ -104,7 +95,6 @@ export const getUsersLikedMovies = createAsyncThunk(
     return movies;
   }
 );
-
 export const removeMovieFromLiked = createAsyncThunk(
   'type-redux/deleteLiked',
   async ({ movieId, email }: any) => {
@@ -126,10 +116,10 @@ export const netflixSlice = createSlice({
       state.genres = action.payload;
       state.genresLoaded = true;
     });
-    builder.addCase(fetchMovies.fulfilled, (state, action) => {
+    builder.addCase<any>(fetchMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
     });
-    builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
+    builder.addCase<any>(fetchDataByGenre.fulfilled, (state, action) => {
       state.movies = action.payload;
     });
     builder.addCase(getUsersLikedMovies.fulfilled, (state, action) => {
@@ -139,8 +129,8 @@ export const netflixSlice = createSlice({
       state.movies = action.payload;
     });
   },
-  reducers: {}
+  reducers: {},
 });
 
-export const { setGenres, setMovies } = netflixSlice.actions;
+export const { setGenres, setMovies }: any = netflixSlice.actions;
 export default netflixSlice.reducer;

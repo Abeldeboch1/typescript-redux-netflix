@@ -51,7 +51,6 @@ function UserListedMovies({ }: UserListedMoviesProps) {
               <Card
                 movieData={movie}
                 index={index}
-                // {movie.id}
                 key={movie}
                 isLiked={true}
               />
