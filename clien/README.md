@@ -69,7 +69,7 @@ Some of the frameworks/libraries those were used to build the project are:
 
 ### Get Started the project build out using wireframe Figma.
 
-<img src="https://raw.githubusercontent.com/Abeldeboch1/typescript-redux-netflix/development/src/assets/figma.png"
+<img src="/public/figma.png"
              height="250" width="500">
 
 <p><a  align="right" href="#top">Back to top</a></p>
