@@ -24,7 +24,7 @@ export const getGenres = createAsyncThunk('netflix/genres', async () => {
   const {
     data: { genres },
   } = await axios.get(
-    "https://api.themoviedb.org/3/genre/movie/list?api_key=e655ce749b6e9689364799559f652abc"
+    'https://api.themoviedb.org/3/genre/movie/list?api_key=e655ce749b6e9689364799559f652abc'
   );
   return genres;
 });
@@ -42,7 +42,7 @@ export const createArrayFromRawData = (array: any[], moviesArray: any[], genres:
         image: movie.backdrop_path,
         genres: movieGenres.slice(0, 3),
       });
-    
+
   });
 };
 const getRawData = async (api, genres, paging = false) => {
@@ -59,7 +59,7 @@ type TypeProps = {
   genre: string;
   type: string;
 }
-export const fetchDataByGenre = createAsyncThunk <movie[], TypeProps, {state: RootState}>(
+export const fetchDataByGenre = createAsyncThunk<movie[], TypeProps, { state: RootState }>(
   'netflix/genre',
   async ({ genre, type }: TypeProps, thunkAPI) => {
     const {
@@ -71,21 +71,21 @@ export const fetchDataByGenre = createAsyncThunk <movie[], TypeProps, {state: Ro
     );
   }
 );
-export const fetchMovies = createAsyncThunk < movie[],
-  { genres: string[]; type: string},
+export const fetchMovies = createAsyncThunk<movie[],
+  { genres: string[]; type: string },
   { state: RootState }>(
-  'netflix/trending',
-  async ({ type }: any, thunkAPI) => {
-    const {
-      netflix: { genres },
-    } = thunkAPI.getState();
-    return getRawData(
-      `${TMDB_BASE_URL}/trending/${type}/week?api_key=${API_KEY}`,
-      genres,
-      true
-    );
-  }
-);
+    'netflix/trending',
+    async ({ type }: any, thunkAPI) => {
+      const {
+        netflix: { genres },
+      } = thunkAPI.getState();
+      return getRawData(
+        `${TMDB_BASE_URL}/trending/${type}/week?api_key=${API_KEY}`,
+        genres,
+        true
+      );
+    }
+  );
 export const getUsersLikedMovies = createAsyncThunk(
   'type-redux/getLiked',
   async (email) => {
@@ -100,7 +100,7 @@ export const removeMovieFromLiked = createAsyncThunk(
   async ({ movieId, email }: any) => {
     const {
       data: { movies },
-    } = await axios.put("http://localhost:5000/api/user/remove", {
+    } = await axios.put('http://localhost:5000/api/user/remove', {
       email,
       movieId,
     });

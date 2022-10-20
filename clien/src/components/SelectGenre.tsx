@@ -7,15 +7,14 @@ type SelectGenreProps = {
   type: string;
   map: [];
 }
-export default function SelectGenre({ genres, type}: SelectGenreProps) {
+function SelectGenre({ genres, type }: SelectGenreProps) {
   const dispatch = useDispatch();
   return (
     <Select
-      className="flex"
+      className='flex'
       onChange={(e) => {
         dispatch<any>(
           fetchDataByGenre({
-            // genres,
             genre: e.target.value,
             type,
           })
@@ -32,6 +31,7 @@ export default function SelectGenre({ genres, type}: SelectGenreProps) {
     </Select>
   );
 }
+export default SelectGenre;
 
 const Select = styled.select`
   margin-left: 5rem;

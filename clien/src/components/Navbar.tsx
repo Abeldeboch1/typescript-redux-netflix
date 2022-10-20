@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaPowerOff, FaSearch } from 'react-icons/fa';
 import logo from '../assets/logo.png';
-import { firebaseAuth } from '../utils/firebase';
+import  firebaseAuth  from '../utils/firebase';
 
 interface NavbarProp {
   isScrolled?: boolean;
 }
-export default function Navbar({ isScrolled }:NavbarProp) {
+export default function Navbar({ isScrolled }: NavbarProp) {
   const [showSearch, setShowSearch] = useState(false);
   const [inputHover, setInputHover] = useState(false);
   const links = [

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { IoPlayCircleSharp } from 'react-icons/io5';
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -8,8 +9,7 @@ import { BiChevronDown } from 'react-icons/bi';
 import { BsCheck } from 'react-icons/bs';
 import axios from 'axios';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { firebaseAuth } from '../utils/firebase';
-import { useDispatch } from 'react-redux';
+import  firebaseAuth  from '../utils/firebase';
 import { removeMovieFromLiked } from '../store/netflixSlice';
 import Request from './Request';
 
@@ -32,10 +32,10 @@ export default React.memo(function Card({ movieData, isLiked = false }: CardProp
   const [email, setEmail] = useState('');
 
   onAuthStateChanged(firebaseAuth, (currentUser: User | null) => {
- console.log(typeof currentUser);
-    
+    console.log(typeof currentUser);
+
     if (currentUser && currentUser.email) {
-      setEmail(currentUser.email );
+      setEmail(currentUser.email);
     } else navigate('/login');
   });
 
@@ -70,8 +70,8 @@ export default React.memo(function Card({ movieData, isLiked = false }: CardProp
               onClick={() => navigate('/player')}
             />
             <div onClick={() => navigate('/player')}>
-              <Request/>
-        </div>
+              <Request />
+            </div>
           </div>
           <div className='info-container flex column'>
             <h3 className='name' onClick={() => navigate('/player')}>
@@ -104,7 +104,7 @@ export default React.memo(function Card({ movieData, isLiked = false }: CardProp
             </div>
             <div className='genres flex'>
               <ul className='flex'>
-                  {movieData.genres.map((genre: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined) => (
+                {movieData.genres.map((genre: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined) => (
                   <li>{genre}</li>
                 ))}
               </ul>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { onAuthStateChanged} from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Navbar from '../components/Navbar';
-import { firebaseAuth } from '../utils/firebase';
+import  firebaseAuth  from '../utils/firebase';
 import { fetchMovies, getGenres } from '../store/netflixSlice';
 import SelectGenre from '../components/SelectGenre';
 import Slider from '../components/Slider';
@@ -13,9 +13,9 @@ import { RootState } from '../store';
 
 function MoviePage() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const movies = useSelector((state:RootState) => state.netflix.movies);
-  const genres = useSelector((state:RootState) => state.netflix.genres);
-  const genresLoaded = useSelector((state:RootState) => state.netflix.genresLoaded);
+  const movies = useSelector((state: RootState) => state.netflix.movies);
+  const genres = useSelector((state: RootState) => state.netflix.genres);
+  const genresLoaded = useSelector((state: RootState) => state.netflix.genresLoaded);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {

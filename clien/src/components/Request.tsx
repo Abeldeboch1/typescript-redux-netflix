@@ -1,10 +1,10 @@
-import React from "react";
-import Detail from "./Detail";
-import requests from "./requests";
+import React from 'react';
+import Detail from './Detail';
+import requests from './requests';
 
 function Request() {
   return (
-    <div className="App">
+    <div>
       <Detail
         title="NETFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginals}
@@ -24,4 +24,4 @@ function Request() {
   );
 }
 
-export default  Request;
+export default Request;
