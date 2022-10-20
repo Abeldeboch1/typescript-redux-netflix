@@ -1,20 +1,18 @@
+import React from 'react';
+import styled from 'styled-components';
+import { BsArrowLeft } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import Request from '../components/Request';
 
-import React from "react";
-import styled from "styled-components";
-import { BsArrowLeft } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
-
-import Request from "../components/Request";
 function Player() {
   const navigate = useNavigate();
-
   return (
     <Container>
-      <div className="player">
-        <div className="back">
+      <div className='player'>
+        <div className='back'>
           <BsArrowLeft onClick={() => navigate(-1)} />
         </div>
-        <Request 
+        <Request
         />
       </div>
     </Container>

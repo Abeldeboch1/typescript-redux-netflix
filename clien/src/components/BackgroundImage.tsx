@@ -5,7 +5,7 @@ import background from '../assets/login_im.jpg';
 function BackgroundImage() {
   return (
     <Container>
-      <img src={background} alt='background' />
+      <img src={background} alt="background" />
     </Container>
   );
 }

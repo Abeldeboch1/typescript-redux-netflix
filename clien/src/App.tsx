@@ -22,7 +22,7 @@ export default function App() {
           name: '',
           image: '',
           id: []
-        }}/>} />
+        }} />} />
         <Route path="/" element={<Netflix />} />
       </Routes>
     </BrowserRouter>

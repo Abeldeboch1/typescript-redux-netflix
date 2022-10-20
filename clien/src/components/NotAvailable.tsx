@@ -2,7 +2,7 @@ import React from 'react';
 
 function NotAvailable() {
   return (
-    <h1 className="not-available">
+    <h1 className='not-available'>
       No Movies avaialble for the selected genre. Please select a different
       genre.
     </h1>

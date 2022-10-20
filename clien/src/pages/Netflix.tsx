@@ -9,33 +9,28 @@ import Navbar from '../components/Navbar';
 import backgroundImage from '../assets/home.jpg';
 import MovieLogo from '../assets/homeTitle.webp';
 import { RootState } from '../store';
-import { firebaseAuth } from '../utils/firebase';
+import firebaseAuth from '../utils/firebase';
 import { fetchMovies, getGenres } from '../store/netflixSlice';
 import Slider from '../components/Slider';
-import { isAsyncThunkAction } from '@reduxjs/toolkit';
 
 function Netflix() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const movies = useSelector((state:RootState) => state.netflix.movies);
-  const genres = useSelector((state:RootState) => state.netflix.genres);
-  const genresLoaded = useSelector((state:RootState) => state.netflix.genresLoaded);
-
+  const movies = useSelector((state: RootState) => state.netflix.movies);
+  const genres = useSelector((state: RootState) => state.netflix.genres);
+  const genresLoaded = useSelector((state: RootState) => state.netflix.genresLoaded);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch<any>(getGenres());
   }, []);
-
   useEffect(() => {
     if (genresLoaded) {
       dispatch<any>(fetchMovies({ genres, type: 'all' }));
     }
   }, [genresLoaded]);
-
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (!currentUser) navigate('/login');
   });
-
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
@@ -44,36 +39,36 @@ function Netflix() {
   return (
     <Container>
       <Navbar isScrolled={isScrolled} />
-      <div className="hero">
+      <div className='hero'>
         <img
           src={backgroundImage}
-          alt="background"
-          className="background-image"
+          alt='background'
+          className='background-image'
         />
-        <div className="container">
-          <div className="logo">
-            <img src={MovieLogo} alt="Movie Logo" />
+        <div className='container'>
+          <div className='logo'>
+            <img src={MovieLogo} alt='Movie Logo' />
           </div>
-          <div className="buttons flex">
+          <div className='buttons flex'>
             <button
               onClick={() => navigate('/player')}
-              className="flex j-center a-center"
+              className='flex j-center a-center'
             >
               <FaPlay />
               Play
             </button>
-            <button className="flex j-center a-center">
+            <button className='flex j-center a-center'>
               <AiOutlineInfoCircle />
               More Info
             </button>
           </div>
         </div>
       </div>
-      <Slider movies={movies}  />
+      <Slider movies={movies} />
     </Container>
   );
 }
-
+export default Netflix;
 const Container = styled.div`
   background-color: black;
   .hero {
@@ -123,4 +118,4 @@ const Container = styled.div`
     }
   }
 `;
-export default Netflix;
+

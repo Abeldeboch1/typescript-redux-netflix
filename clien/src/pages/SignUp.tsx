@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import BackgroundImage from '../components/BackgroundImage';
 import Header from '../components/Header';
-import { firebaseAuth } from '../utils/firebase';
-interface ContainerProps  {
+import firebaseAuth from '../utils/firebase';
+interface ContainerProps {
   readonly showPassword: boolean;
 }
-function SignUp( ) {
+function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [formValues, setFormValues] = useState({
     email: '',
@@ -33,38 +33,38 @@ function SignUp( ) {
   return (
     <Container showPassword={showPassword}>
       <BackgroundImage />
-      <div className="content">
+      <div className='content'>
         <Header login />
-        <div className="body flex column a-center j-center">
-          <div className="text flex column">
+        <div className='body flex column a-center j-center'>
+          <div className='text flex column'>
             <h1>Unlimited movies, TV shows and more.</h1>
             <h4>Watch anywhere. Cancel anytime.</h4>
             <h6>
               Ready to watch? Enter your email to create or restart membership.
             </h6>
           </div>
-          <div className="form">
+          <div className='form'>
             <input
-              type="email"
-              placeholder="Email address"
+              type='email'
+              placeholder='Email address'
               onChange={(e) =>
                 setFormValues({
                   ...formValues,
                   [e.target.name]: e.target.value,
                 })}
-              name="email"
+              name='email'
               value={formValues.email}
             />
             {showPassword && (
               <input
-                type="password"
-                placeholder="Password"
+                type='password'
+                placeholder='Password'
                 onChange={(e) =>
                   setFormValues({
                     ...formValues,
                     [e.target.name]: e.target.value,
                   })}
-                name="password"
+                name='password'
                 value={formValues.password}
               />
             )}
@@ -102,7 +102,7 @@ const Container = styled.div<ContainerProps>`
       }
       .form {
         display: grid;
-        grid-template-columns: ${({ showPassword}) =>
+        grid-template-columns: ${({ showPassword }) =>
     showPassword ? '1fr 1fr' : '2fr 1fr'};
         width: 60%;
         input {

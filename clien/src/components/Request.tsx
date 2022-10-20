@@ -1,22 +1,22 @@
-import React from "react";
-import Row from "./Row";
-import requests from "./requests";
+import React from 'react';
+import Detail from './Detail';
+import requests from './requests';
 
 function Request() {
   return (
-    <div className="App">
-      <Row
+    <div>
+      <Detail
         title="NETFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginals}
         isLargeRow
       />
-      <Row title="Trending Now" fetchUrl={requests.fetchTrending} />
-      <Row title="Top Rated" fetchUrl={requests.fetchTopRatedMovies} />
-      <Row title="Action Movies" fetchUrl={requests.fetchActionMovies} />
-      <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
-      <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
-      <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
-      <Row
+      <Detail title="Trending Now" fetchUrl={requests.fetchTrending} />
+      <Detail title="Top Rated" fetchUrl={requests.fetchTopRatedMovies} />
+      <Detail title="Action Movies" fetchUrl={requests.fetchActionMovies} />
+      <Detail title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
+      <Detail title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
+      <Detail title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
+      <Detail
         title="Documentaries Movies"
         fetchUrl={requests.fetchDocumentaries}
       />
@@ -24,4 +24,4 @@ function Request() {
   );
 }
 
-export default  Request;
+export default Request;

@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 interface Prop {
- login: boolean;
+  login: boolean;
 }
- function Header({login} : Prop) {
+function Header({ login }: Prop) {
   const navigate = useNavigate();
   return (
     <StyledHeader className='flex a-center j-between'>
