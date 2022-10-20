@@ -4,10 +4,9 @@ import styled from 'styled-components';
 import CardSlider from './CardSlider';
 
 interface SliderProp {
-  movies: string| undefined;
-
+  movies: string[];
 }
-export default function Slider({ movies }: SliderProp) {
+function Slider({ movies }: SliderProp) {
   const getMoviesFromRange = (from: number, to: number) => {
     return movies?.slice(from, to);
   };
@@ -26,13 +25,13 @@ export default function Slider({ movies }: SliderProp) {
         title="Blockbuster Movies" movieData={{
           name: '',
           image: ''
-        }} map={[]} index={undefined}      />
+        }} map={[]} index={undefined} />
       <CardSlider
         data={getMoviesFromRange(30, 40)}
         title="Popular on Netflix" movieData={{
           name: '',
           image: ''
-        }} map={[]} index={undefined}      />
+        }} map={[]} index={undefined} />
       <CardSlider data={getMoviesFromRange(40, 50)} title="Action Movies" movieData={{
         name: '',
         image: ''
@@ -44,5 +43,5 @@ export default function Slider({ movies }: SliderProp) {
     </Container>
   );
 }
-
+export default Slider;
 const Container = styled.div``;

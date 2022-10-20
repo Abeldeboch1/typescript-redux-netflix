@@ -5,15 +5,19 @@ import Card from './Card';
 type CardSliderProps = {
   data?: any;
   title?: string;
-  movieData: { 
+  movieData: {
     name: string | undefined;
     image: string | undefined;
   };
   map: [];
   index: any;
 }
+interface ContainerProps {
+  readonly showControls: boolean;
+};
+
 export default React.memo(({ data, title }: CardSliderProps) => {
-  const listRef= useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const [sliderPosition, setSliderPosition] = useState(0);
   const [showControls, setShowControls] = useState(false);
   const handleDirection = (direction: string) => {
@@ -37,21 +41,19 @@ export default React.memo(({ data, title }: CardSliderProps) => {
       <h1>{title}</h1>
       <div className="wrapper">
         <div
-          className={`slider-action left ${
-            !showControls ? 'none' : ''
-          } flex j-center a-center`}
+          className={`slider-action left ${!showControls ? 'none' : ''
+            } flex j-center a-center`}
         >
           <AiOutlineLeft onClick={() => handleDirection('left')} />
         </div>
         <div className="slider flex" ref={listRef}>
-          {data.map((movie: { id: any; genres?: any; name?: string; image?: string; }, index: any) => {
+          {data.map((movie, index) => {
             return <Card movieData={movie} index={index} key={movie.id} />;
           })}
         </div>
         <div
-          className={`slider-action right ${
-            !showControls ? 'none' : ''
-          } flex j-center a-center`}
+          className={`slider-action right ${!showControls ? 'none' : ''
+            } flex j-center a-center`}
         >
           <AiOutlineRight onClick={() => handleDirection('right')} />
         </div>
@@ -59,7 +61,7 @@ export default React.memo(({ data, title }: CardSliderProps) => {
     </Container>
   );
 });
-const Container = styled.div`
+const Container = styled.div<ContainerProps>`
   gap: 1rem;
   position: relative;
   padding: 2rem 0;

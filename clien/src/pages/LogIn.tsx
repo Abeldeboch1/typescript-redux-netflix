@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import BackgroundImage from '../components/BackgroundImage';
 import Header from '../components/Header';
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
-import { firebaseAuth } from '../utils/firebase';
+import firebaseAuth from '../utils/firebase';
 
 function LogIn() {
   const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ function LogIn() {
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
-    } catch (error:any) {
+    } catch (error: any) {
       console.log(error.code);
     }
   };
@@ -26,27 +26,27 @@ function LogIn() {
   return (
     <Container>
       <BackgroundImage />
-      <div className="content">
+      <div className='content'>
         <Header login={false} />
-        <div className="form-container flex column a-center j-center">
-          <div className="form flex column a-center j-center">
-            <div className="title">
+        <div className='form-container flex column a-center j-center'>
+          <div className='form flex column a-center j-center'>
+            <div className='title'>
               <h3>Login</h3>
             </div>
-            <div className="container flex column">
+            <div className='container flex column'>
               <input
-                type="text"
-                placeholder="Email"
+                type='text'
+                placeholder='Email'
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
               />
               <input
-                type="password"
-                placeholder="Password"
+                type='password'
+                placeholder='Password'
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
-              <button onClick={handleLogin}>Login to your account</button>         
+              <button onClick={handleLogin} data-testid='custom-element'>Login to your account</button>
             </div>
           </div>
         </div>
@@ -95,5 +95,3 @@ const Container = styled.div`
     }
   }
 `;
-
-

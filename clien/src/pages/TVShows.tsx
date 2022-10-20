@@ -4,23 +4,17 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Navbar from '../components/Navbar';
-import CardSlider from '../components/CardSlider';
-import { firebaseAuth } from '../utils/firebase';
+import firebaseAuth from '../utils/firebase';
 import { fetchMovies, getGenres } from '../store/netflixSlice';
 import SelectGenre from '../components/SelectGenre';
 import Slider from '../components/Slider';
 import { RootState } from '../store';
-import { any } from 'prop-types';
 
-type TVShowsProps = {
-  
-}
-function TVShows({}: TVShowsProps) {
+function TVShows() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const movies = useSelector((state:RootState) => state.netflix.movies);
-  const genres = useSelector((state:RootState) => state.netflix.genres);
-  const genresLoaded = useSelector((state:RootState) => state.netflix.genresLoaded);
-  const dataLoading = useSelector((state:RootState) => state.netflix.dataLoading);
+  const movies = useSelector((state: RootState) => state.netflix.movies);
+  const genres = useSelector((state: RootState) => state.netflix.genres);
+  const genresLoaded = useSelector((state: RootState) => state.netflix.genresLoaded);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,7 +29,7 @@ function TVShows({}: TVShowsProps) {
     }
   }, [genresLoaded]);
 
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState('');
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) setUser(currentUser.uid);
@@ -50,14 +44,14 @@ function TVShows({}: TVShowsProps) {
   return (
     <Container>
       <Navbar isScrolled={isScrolled} />
-      <div className="data">
-        <SelectGenre genres={genres} type="tv" />
+      <div className='data'>
+        <SelectGenre genres={genres} type='tv' map={[]} />
         {movies?.length ? (
           <>
             <Slider movies={movies} />
           </>
         ) : (
-          <h1 className="not-available">
+          <h1 className='not-available'>
             No TV Shows avaialble for the selected genre. Please select a
             different genre.
           </h1>

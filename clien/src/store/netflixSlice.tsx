@@ -1,45 +1,33 @@
 import {
   createAsyncThunk,
-  createSlice,
+  createSlice
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '.';
 import { API_KEY, TMDB_BASE_URL } from '../utils/constants';
-interface netflix {
-  [x: string]: any;
-  movies?: [];
-  genresLoaded: boolean;
-  genres?: [];
-}
-interface movie { 
+interface movie {
   id: number;
   name: string;
   image: string;
-  genres: string[];
-  setGenres: any;
-  setMovies: any;
-}
-interface netflix {
-  movie?: movie[];
+  genres: string;
+  setGenres: {};
+  setMovies: {};
+  movies: string[];
   genresLoaded: boolean;
-  // genres?: string[];
 }
-const initialState: netflix = {
+const initialState = {
   movies: [],
   genresLoaded: false,
   genres: [],
-  
 };
-
-export const getGenres = createAsyncThunk("netflix/genres", async () => {
+export const getGenres = createAsyncThunk('netflix/genres', async () => {
   const {
     data: { genres },
   } = await axios.get(
-    "https://api.themoviedb.org/3/genre/movie/list?api_key=e655ce749b6e9689364799559f652abc"
+    'https://api.themoviedb.org/3/genre/movie/list?api_key=e655ce749b6e9689364799559f652abc'
   );
   return genres;
 });
-
 export const createArrayFromRawData = (array: any[], moviesArray: any[], genres: any[]) => {
   array.forEach((movie: { genre_ids: any[]; backdrop_path: any; id: any; original_name: any; original_title: any; }) => {
     const movieGenres: any[] = [];
@@ -54,12 +42,11 @@ export const createArrayFromRawData = (array: any[], moviesArray: any[], genres:
         image: movie.backdrop_path,
         genres: movieGenres.slice(0, 3),
       });
-    
+
   });
 };
-
-export const getRawData = async (api: string, genres: any, paging = false) => {
-  const moviesArray: string | any[] = [];
+const getRawData = async (api, genres, paging = false) => {
+  const moviesArray = [];
   for (let i = 1; moviesArray.length < 60 && i < 10; i++) {
     const {
       data: { results },
@@ -69,11 +56,11 @@ export const getRawData = async (api: string, genres: any, paging = false) => {
   return moviesArray;
 };
 type TypeProps = {
-  genre?: string;
-  type?: string;
+  genre: string;
+  type: string;
 }
-export const fetchDataByGenre = createAsyncThunk <movie[], TypeProps, {state: RootState}>(
-  "netflix/genre",
+export const fetchDataByGenre = createAsyncThunk<movie[], TypeProps, { state: RootState }>(
+  'netflix/genre',
   async ({ genre, type }: TypeProps, thunkAPI) => {
     const {
       netflix: { genres },
@@ -84,21 +71,21 @@ export const fetchDataByGenre = createAsyncThunk <movie[], TypeProps, {state: Ro
     );
   }
 );
-
-export const fetchMovies = createAsyncThunk < movie[], string, { state: RootState}>(
-  'netflix/trending',
-  async ({ type }: any, thunkAPI) => {
-    const {
-      netflix: { genres },
-    } = thunkAPI.getState();
-    return getRawData(
-      `${TMDB_BASE_URL}/trending/${type}/week?api_key=${API_KEY}`,
-      genres,
-      true
-    );
-  }
-);
-
+export const fetchMovies = createAsyncThunk<movie[],
+  { genres: string[]; type: string },
+  { state: RootState }>(
+    'netflix/trending',
+    async ({ type }: any, thunkAPI) => {
+      const {
+        netflix: { genres },
+      } = thunkAPI.getState();
+      return getRawData(
+        `${TMDB_BASE_URL}/trending/${type}/week?api_key=${API_KEY}`,
+        genres,
+        true
+      );
+    }
+  );
 export const getUsersLikedMovies = createAsyncThunk(
   'type-redux/getLiked',
   async (email) => {
@@ -108,13 +95,12 @@ export const getUsersLikedMovies = createAsyncThunk(
     return movies;
   }
 );
-
 export const removeMovieFromLiked = createAsyncThunk(
   'type-redux/deleteLiked',
   async ({ movieId, email }: any) => {
     const {
       data: { movies },
-    } = await axios.put("http://localhost:5000/api/user/remove", {
+    } = await axios.put('http://localhost:5000/api/user/remove', {
       email,
       movieId,
     });
@@ -130,11 +116,11 @@ export const netflixSlice = createSlice({
       state.genres = action.payload;
       state.genresLoaded = true;
     });
-    builder.addCase(fetchMovies.fulfilled, (state, action) => {
-      state.movies; [] = action.payload;
+    builder.addCase<any>(fetchMovies.fulfilled, (state, action) => {
+      state.movies = action.payload;
     });
-    builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
-      state.movies; [] = action.payload;
+    builder.addCase<any>(fetchDataByGenre.fulfilled, (state, action) => {
+      state.movies = action.payload;
     });
     builder.addCase(getUsersLikedMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
@@ -143,10 +129,8 @@ export const netflixSlice = createSlice({
       state.movies = action.payload;
     });
   },
-  reducers: {}
+  reducers: {},
 });
 
-
-
-export const { setGenres, setMovies } = netflixSlice.actions;
+export const { setGenres, setMovies }: any = netflixSlice.actions;
 export default netflixSlice.reducer;
