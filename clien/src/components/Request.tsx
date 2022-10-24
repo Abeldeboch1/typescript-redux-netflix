@@ -10,6 +10,7 @@ function Request() {
         fetchUrl={requests.fetchNetflixOriginals}
         isLargeRow
       />
+      
       <Detail title="Trending Now" fetchUrl={requests.fetchTrending} />
       <Detail title="Top Rated" fetchUrl={requests.fetchTopRatedMovies} />
       <Detail title="Action Movies" fetchUrl={requests.fetchActionMovies} />
