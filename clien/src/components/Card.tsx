@@ -9,7 +9,7 @@ import { BiChevronDown } from 'react-icons/bi';
 import { BsCheck } from 'react-icons/bs';
 import axios from 'axios';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import  firebaseAuth  from '../utils/firebase';
+import firebaseAuth from '../utils/firebase';
 import { removeMovieFromLiked } from '../store/netflixSlice';
 import Request from './Request';
 

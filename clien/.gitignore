@@ -11,10 +11,10 @@
 # production
 /build
 
-# misc
-# axios 
-# requests
-# utils
+misc
+axios 
+requests
+utils
 .DS_Store
 .env.local
 .env

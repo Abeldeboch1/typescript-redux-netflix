@@ -2,7 +2,6 @@ const User = require("../models/UserModel");
 
 module.exports.getLikedMovies = async (req, res) => {
   try {
-    console.log("test");
     const { email } = req.params;
     const user =  await User.findOne({ email });
     if (user) {

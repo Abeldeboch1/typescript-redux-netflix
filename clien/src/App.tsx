@@ -6,7 +6,7 @@ import Netflix from './pages/Netflix';
 import Player from './pages/Player';
 import SignUp from './pages/SignUp';
 import TVShows from './pages/TVShows';
-import UserListedMovies from './pages/UserListedMovies';
+// import UserListedMovies from './pages/UserListedMovies';
 
 export default function App() {
   return (
@@ -18,11 +18,11 @@ export default function App() {
         <Route path="/tv" element={<TVShows />} />
         <Route path="/movies" element={<MoviePage />} />
         <Route path="/new" element={<Player />} />
-        <Route path="/mylist" element={<UserListedMovies movieData={{
+        {/* <Route path="/mylist" element={<UserListedMovies movieData={{
           name: '',
           image: '',
           id: []
-        }} />} />
+        }} />} /> */}
         <Route path="/" element={<Netflix />} />
       </Routes>
     </BrowserRouter>

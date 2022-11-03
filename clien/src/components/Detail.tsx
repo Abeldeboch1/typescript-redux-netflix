@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './Detail.css';
 import YouTube from 'react-youtube';
 import movieTrailer from 'movie-trailer';
 import axios from './axios';
+import styled from 'styled-components';
 
 
 const base_url = 'https://image.tmdb.org/t/p/original/';
@@ -45,7 +45,7 @@ function Detail({ title, fetchUrl, isLargeRow }: DetailProps) {
   }
 
   return (
-    <div className="row">
+  <StyledDetail className='row'>
       <h2>{title}</h2>
       <div className="row__posters">
         {movies.map((movie: any) => (
@@ -62,7 +62,41 @@ function Detail({ title, fetchUrl, isLargeRow }: DetailProps) {
       <div style={{ padding: "40px" }}>
         <YouTube videoId={trailerUrl} opts={opts} />
       </div>
-    </div>
+</StyledDetail>
   );
 }
 export default Detail;
+
+const StyledDetail = styled.div`
+.row {
+  margin-left: 20px;
+  color: white;
+}
+.row__poster {
+  width: 100%;
+  object-fit: contain;
+  max-height: 100px;
+  transition: transform 450ms;
+  margin-right: 10px;
+}
+.row__posters {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 20px;
+}
+.row__posters::-webkit-scrollbar {
+  display: none;
+}
+.row__poster:hover {
+  transform: scale(1.08);
+  /* opacity: 1.2; */
+}
+.row__posterLarge {
+  max-height: 250px;
+}
+.row__posterLarge:hover {
+  transform: scale(1.09);
+  opacity: 1;
+}
+`;
