@@ -5,6 +5,7 @@ import {
 import axios from 'axios';
 import { RootState } from '.';
 import { API_KEY, TMDB_BASE_URL } from '../utils/constants';
+
 interface movie {
   id: number;
   name: string;

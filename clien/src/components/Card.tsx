@@ -12,7 +12,6 @@ import { onAuthStateChanged, User } from 'firebase/auth';
 import firebaseAuth from '../utils/firebase';
 import { removeMovieFromLiked } from '../store/netflixSlice';
 import Request from './Request';
-import { features } from 'process';
 
 
 type CardProps = {
